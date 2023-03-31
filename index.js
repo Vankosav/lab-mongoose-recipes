@@ -15,9 +15,31 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
+  .then(() => { 
+    const recept = {
+        title: "Gomboce",
+        level: "Amateur Chef",
+        ingredients: ['flour', 'water', 'oil', 'sugar', 'plum'],
+        cuisine: "Serbian",
+        dishType: "dessert",
+        duration: 60,
+        creator: "Ivana",
+  }
+  console.log(`${recept.title}`)
+  return Recipe.create(recept);
+})
+.then(() => {
+  data.forEach((recipe)=>console.log(recipe.title));
+  return Recipe.insertMany(data)
+})
+.then(() => {
+  return Recipe.findOneAndUpdate()
+})
+
+      //create a new recipe by using the method given ITERATION 2
+    // ITERATION 3 activate variable data to get the data. json file
     // Run your code here, after you have insured that the connection was made
-  })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+  
