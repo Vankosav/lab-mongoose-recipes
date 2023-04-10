@@ -33,9 +33,17 @@ mongoose
   return Recipe.insertMany(data)
 })
 .then(() => {
-  return Recipe.findOneAndUpdate()
+  const changeDuration = {
+    duration: 100
+  }; 
+  console.log('success');
+  return Recipe.findOneAndUpdate({ title: "Gomboce" }, changeDuration);
 })
-
+.then(() => {
+  console.log('deleted');
+  return Recipe.deleteOne({ title : "Carrot Cake"});
+})
+ 
       //create a new recipe by using the method given ITERATION 2
     // ITERATION 3 activate variable data to get the data. json file
     // Run your code here, after you have insured that the connection was made
