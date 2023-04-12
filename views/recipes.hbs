@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{this.title}}</title>
+  </head>
+  <body>
+    <h1>{{this.title}}</h1>
+    <div class="recipe-details">
+      <div class="recipe-image">
+        <img src="{{this.image}}" alt="{{this.title}}">
+      </div>
+      <div class="recipe-info">
+        <h2>Ingredients</h2>
+        <ul>
+          {{#each recipe}}
+            <li>{{this.ingredients}}</li>
+          {{/each}}
+        </ul>
+        <h2>Instructions</h2>
+        <ol>
+          {{#each recipe}}
+            <li>{{this.instructions}}</li>
+          {{/each}}
+        </ol>
+        {{#if additionalInfo}}
+          <h2>Additional Information</h2>
+          <p>{{additionalInfo}}</p>
+        {{/if}}
+      </div>
+    </div>
+  </body>
+</html>

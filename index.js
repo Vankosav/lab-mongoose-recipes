@@ -1,4 +1,7 @@
+const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
+const hbs = require('hbs');
 
 // Import of the model Recipe from './models/Recipe.model.js'
 const Recipe = require('./models/Recipe.model');
@@ -7,6 +10,8 @@ const data = require('./data');
 
 const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
 
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
 // Connection to the database "recipe-app"
 mongoose
   .connect(MONGODB_URI)
@@ -50,4 +55,25 @@ mongoose
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+  app.get('/', async (req, res) => {
+    try {
+      const recipes = await Recipe.find(); // retrieve all documents from the 'recipes' collection
+      res.render('home', { recipes }); // pass the recipe data to the 'home' template
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    } 
+  });
   
+  app.get('/recipes/:id', async (req, res) => {
+    try {
+      const recipe = await Recipe.findById(req.params.id); // retrieve the recipe by ID from the database
+      res.render('recipes', recipe); // pass the recipe data to the 'recipe' template
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
+  app.listen(3000, () => console.log('Server started on port 3000'));
