@@ -23,6 +23,7 @@ mongoose
   .then(() => { 
     const recept = {
         title: "Gomboce",
+        image: "https://www.gomex.rs/storage/posts/September2019/avrBu1m2I4ewKYR9fOjZ.jpg",
         level: "Amateur Chef",
         ingredients: ['flour', 'water', 'oil', 'sugar', 'plum'],
         cuisine: "Serbian",

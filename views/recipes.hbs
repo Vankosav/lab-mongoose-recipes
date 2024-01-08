@@ -12,20 +12,24 @@
       <div class="recipe-info">
         <h2>Ingredients</h2>
         <ul>
-          {{#each recipe}}
-            <li>{{this.ingredients}}</li>
+          {{#each ingredients}}
+            <li>{{this}}</li>
           {{/each}}
         </ul>
-        <h2>Instructions</h2>
-        <ol>
-          {{#each recipe}}
-            <li>{{this.instructions}}</li>
-          {{/each}}
-        </ol>
+        <h2>Level</h2>
+        <p>{{this.level}}</p>
         {{#if additionalInfo}}
           <h2>Additional Information</h2>
           <p>{{additionalInfo}}</p>
         {{/if}}
+        <h2>Cuisine</h2>
+        <p>{{this.cuisine}}</p>
+        <h2>Meal Type</h2>
+        <p>{{this.dishType}}</p>
+        <h2>Duration</h2>
+        <p>{{this.duration}}</p>
+        <h2>Creater</h2>
+        <p>{{this.creator}}</p>
       </div>
     </div>
   </body>
