@@ -1,7 +1,10 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
+
+const app = express();
 const hbs = require('hbs');
+
+const PORT = process.env.PORT || 3000;
 
 // Import of the model Recipe from './models/Recipe.model.js'
 const Recipe = require('./models/Recipe.model');
@@ -12,6 +15,11 @@ const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
 
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
+app.use(express.static(__dirname + '/views'));
+hbs.registerPartials(__dirname + "/views")
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
+
 // Connection to the database "recipe-app"
 mongoose
   .connect(MONGODB_URI)
@@ -31,7 +39,7 @@ mongoose
         duration: 60,
         creator: "Ivana",
   }
-  console.log(`${recept.title}`)
+  //console.log(`${recept.title}`)
   return Recipe.create(recept);
 })
 .then(() => {
@@ -42,11 +50,11 @@ mongoose
   const changeDuration = {
     duration: 100
   }; 
-  console.log('success');
+  //console.log('success');
   return Recipe.findOneAndUpdate({ title: "Gomboce" }, changeDuration);
 })
 .then(() => {
-  console.log('deleted');
+  //console.log('deleted');
   return Recipe.deleteOne({ title : "Carrot Cake"});
 })
  
@@ -60,9 +68,10 @@ mongoose
   app.get('/', async (req, res) => {
     try {
       const recipes = await Recipe.find(); // retrieve all documents from the 'recipes' collection
+      //console.log(recipes);
       res.render('home', { recipes }); // pass the recipe data to the 'home' template
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       res.status(500).send('Internal Server Error');
     } 
   });
@@ -70,6 +79,7 @@ mongoose
   app.get('/recipes/:id', async (req, res) => {
     try {
       const recipe = await Recipe.findById(req.params.id); // retrieve the recipe by ID from the database
+      //console.log(recipe);
       res.render('recipes', recipe); // pass the recipe data to the 'recipe' template
     } catch (err) {
       console.log(err);
@@ -77,4 +87,4 @@ mongoose
     }
   });
 
-  app.listen(3000, () => console.log('Server started on port 3000'));
+  app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));

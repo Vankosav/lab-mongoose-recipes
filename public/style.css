@@ -1,0 +1,23 @@
+body { 
+    margin:0px; 
+    padding: 0px;   
+}
+
+.title {
+    color: red;
+    margin-left: 500px;
+}
+
+.recipe-list {
+    margin-top: 50px;
+    margin-left: 80px;
+    padding: 20px;
+    width: 300px;
+    display: inline-flex;
+    flex-direction: column;
+}
+ 
+img {
+    width: 720px;
+    height: 480px;
+}
